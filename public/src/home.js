@@ -9,27 +9,33 @@ function getTotalBooksCount(books)
   return books.length; 
 }
 
+const numbers = [1, 2, 3];
+let sum = numbers.reduce((prev, curr) => {
+  let results = prev + curr;
+  return results;
+}, 0)
+
 //getTotalAccountsCount - takes in an array of accounts
 //returns the number of accounts in the array
 function getTotalAccountsCount(accounts) 
 {
-  return accounts.length;
+  let total = 0;
+  const accountTotal = accounts.reduce((result, currAccount) => {
+    if (currAccount)
+    {
+      result++;
+    }
+  return result;
+}, total)
+return accountTotal;
 }
 
 //getBooksBorrowedCount - takes an array of books
 //returns the number of books currently checked out
 function getBooksBorrowedCount(books) 
 {
-  let borrowedCount = 0;
-  for (let i = 0; i < books.length; i++)
-  {
-      if (books[i].borrows[0].returned === false)
-      {
-        borrowedCount++;
-      }      
-  }
-  return borrowedCount;
-
+  let borrowedBooks = books.filter((book) => book.borrows[0].returned === false);
+  return borrowedBooks.length;
 }
 
 //getMostCommonGenres - takes an array of book objects
