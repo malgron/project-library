@@ -1,3 +1,15 @@
+//arrSortAndReduce - takes in an array and maxSize number
+//returns an array that has been reduced to the specified size
+function arrSortAndReduce(arr, maxSize)
+{
+  arr.sort((a, b) => b.count - a.count);
+  if (arr.length > maxSize) {
+    return arr.slice(0, maxSize);
+  }
+  return arr;
+
+}
+
 //getTotalBooksCount - takes in an array of book objects
 //returns the number of objects in the array
 function getTotalBooksCount(books) 
@@ -8,12 +20,6 @@ function getTotalBooksCount(books)
   }
   return books.length; 
 }
-
-const numbers = [1, 2, 3];
-let sum = numbers.reduce((prev, curr) => {
-  let results = prev + curr;
-  return results;
-}, 0)
 
 //getTotalAccountsCount - takes in an array of accounts
 //returns the number of accounts in the array
@@ -58,15 +64,16 @@ function getMostCommonGenres(books)
       temp.push({ name: genre, count: 1 });
     }
   });
-  temp.sort((a, b) => b.count - a.count);
-  if (temp.length > 5) {
-    return temp.slice(0, 5);
-  }
-  return temp;
+    //helper function to sort and reduce array
+    let sortedList = arrSortAndReduce(temp, 5);
+  
+    return sortedList;
+
 }
 
 //getMostPopularAuthors - takes an array of book objects
-//returns an array containg 5 or less entries containing most popular book titles and a count of how many times the books have been checked out
+//returns an array containg 5 or less entries containing most popular book titles 
+//and a count of how many times the books have been checked out
 function getMostPopularBooks(books) 
 {
   const mostPopularBooks = [];
@@ -75,12 +82,11 @@ function getMostPopularBooks(books)
   {
     mostPopularBooks.push({ name: books[i].title, count: books[i].borrows.length});
   }
+
+  //helper function to sort and reduce array
+  let sortedList = arrSortAndReduce(mostPopularBooks, 5);
   
-  mostPopularBooks.sort((a, b) => b.count - a.count);
-  if (mostPopularBooks.length > 5) {
-    return mostPopularBooks.slice(0, 5);
-  }
-  return mostPopularBooks;
+  return sortedList;
 }
 
 //getMostPopularAuthors - takes an array of book objects and an array of author objects
@@ -101,12 +107,12 @@ function getMostPopularAuthors(books, authors)
     }
     
   }
+
+    //helper function to sort and reduce array
+    let sortedList = arrSortAndReduce(mostPopularAuthors, 5);
   
-  mostPopularAuthors.sort((a, b) => b.count - a.count);
-  if (mostPopularAuthors.length > 5) {
-    return mostPopularAuthors.slice(0, 5);
-  }
-  return mostPopularAuthors;
+    return sortedList;
+
 }
 
 module.exports = {
